@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <title>SIG Pemalang - Pemetaan Tanaman Buah</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="SIG, Pemalang, Pertanian, GIS" name="keywords">
+    <meta content="Sistem Informasi Geografis Pemetaan Tanaman Buah di Kabupaten Pemalang" name="description">
+
+    <link href="img/favicon.ico" rel="icon">
+
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="top-bar d-none d-md-block">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="top-bar-left">
+                        <div class="text">
+                            <i class="fa fa-envelope"></i>
+                            <p>rohmanfatkhul946@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="top-bar-right">
+                        <div class="social">
+                            <a href="https://www.linkedin.com/in/fatkhul-rohman-a88881313?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/fatkhulrhm?igsh=MWJtb2Z0ajJtZnhqYQ=="><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a href="index.html" class="navbar-brand">PML</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                    <a href="index.html" class="nav-item nav-link active">Beranda</a>
+                    <a href="#about" class="nav-item nav-link">Latar Belakang</a>
+                    <a href="map.html" class="nav-item nav-link">Peta Interaktif</a>
+                    <a href="kontak.html" class="nav-item nav-link">Kontak</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="carousel">
+        <div class="container-fluid">
+            <div class="owl-carousel">
+                <div class="carousel-item">
+                    <div class="carousel-img">
+                        <img src="Buuah.jpeg" alt="Image">
+                    </div>
+                    <div class="carousel-text">
+                        <h1>Pemetaan Potensi Tanaman Buah</h1>
+                        <p>
+                            Sistem Informasi Geografis untuk memetakan sebaran Alpukat, Mangga, dan Rambutan di Kabupaten Pemalang.
+                        </p>
+                        <div class="carousel-btn">
+                            <a class="btn btn-custom" href="map.html">Lihat Peta</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="carousel-img">
+                        <img src="2.jpeg" alt="Image">
+                    </div>
+                    <div class="carousel-text">
+                        <h1>Analisis Agroklimat & Topografi</h1>
+                        <p>
+                            Menganalisis hubungan antara ketinggian lahan (mdpl) dengan jenis tanaman buah yang dominan.
+                        </p>
+                        <div class="carousel-btn">
+                            <a class="btn btn-custom" href="map.html">Lihat Peta</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="carousel-img">
+                        <img src="3.jpeg" alt="Image">
+                    </div>
+                    <div class="carousel-text">
+                        <h1>Mendukung Pertanian Daerah</h1>
+                        <p>
+                            Memberikan gambaran visual yang akurat untuk pengambilan keputusan perencanaan pertanian.
+                        </p>
+                        <div class="carousel-btn">
+                            <a class="btn btn-custom" href="map.html">Lihat Peta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="about" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-img" data-parallax="scroll" data-image-src="buah-buahan.jpeg"></div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="section-header">
+                        <p>Latar Belakang</p>
+                        <h2>Potensi Pertanian Kabupaten Pemalang</h2>
+                    </div>
+                    <div class="about-tab">
+                        <ul class="nav nav-pills nav-justified">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="pill" href="#tab-content-1">Umum</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" href="#tab-content-2">Topografi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" href="#tab-content-3">Komoditas</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="tab-content-1" class="container tab-pane active">
+                                Kabupaten Pemalang dianugerahi potensi sumber daya alam yang luar biasa, khususnya dalam sektor pertanian hortikultura. Secara geografis, wilayah ini memiliki karakteristik topografi yang unik dan bervariasi, membentang mulai dari kawasan pegunungan yang
+                                sejuk di sisi selatan hingga hamparan dataran rendah di sisi utara.
+                            </div>
+                            <div id="tab-content-2" class="container tab-pane fade">
+                                <p>
+                                    Variasi elevasi lahan memainkan peran krusial dalam menentukan kesesuaian jenis komoditas. Wilayah selatan yang merupakan dataran tinggi (>400 mdpl), seperti Kecamatan Moga, memiliki karakteristik suhu sejuk yang menjadi habitat ideal bagi pertumbuhan
+                                    optimal tanaman Alpukat.
+                                </p>
+                            </div>
+                            <div id="tab-content-3" class="container tab-pane fade">
+                                Tiga komoditas utama yang dipetakan adalah: 1. Alpukat (Dataran Tinggi/Sejuk) 2. Mangga (Dataran Rendah/Panas) 3. Rambutan (Dataran Menengah/Lembab)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="service" id="features">
+        <div class="container">
+            <div class="section-header text-center">
+                <p>Fitur Unggulan</p>
+                <h2>Teknologi Pemetaan Modern</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item">
+                        <div class="service-icon"><i class="fas fa-map-marked-alt"></i></div>
+                        <div class="service-text">
+                            <h3>Visualisasi Interaktif</h3>
+                            <p>Peta digital interaktif yang menampilkan sebaran tanaman Alpukat, Mangga, dan Rambutan secara spasial.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item">
+                        <div class="service-icon"><i class="fas fa-mountain"></i></div>
+                        <div class="service-text">
+                            <h3>Analisis Topografi</h3>
+                            <p>Informasi detail mengenai elevasi (mdpl) dan karakteristik wilayah yang mempengaruhi kesesuaian lahan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item">
+                        <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="service-text">
+                            <h3>Statistik Produksi</h3>
+                            <p>Penyajian data kuantitatif hasil panen tahunan (kuintal) berdasarkan laporan valid BPS Pemalang.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item">
+                        <div class="service-icon"><i class="fas fa-search-location"></i></div>
+                        <div class="service-text">
+                            <h3>Zonasi Wilayah</h3>
+                            <p>Analisis pola pengelompokan komoditas berdasarkan zona iklim (Utara, Tengah, Selatan).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item">
+                        <div class="service-icon"><i class="fas fa-vector-square"></i></div>
+                        <div class="service-text">
+                            <h3>Batas Administrasi</h3>
+                            <p>Layer data spasial batas kecamatan Kabupaten Pemalang yang terintegrasi dan akurat.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item">
+                        <div class="service-icon"><i class="fas fa-users"></i></div>
+                        <div class="service-text">
+                            <h3>Informasi Publik</h3>
+                            <p>Platform terbuka yang memudahkan masyarakat dan petani mengakses informasi potensi daerah.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="facts" data-parallax="scroll" data-image-src="buuah.jpeg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="facts-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <div class="facts-text">
+                            <h3 class="facts-plus" data-toggle="counter-up">14</h3>
+                            <p>Kecamatan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="facts-item">
+                        <i class="fas fa-seedling"></i>
+                        <div class="facts-text">
+                            <h3 class="facts-plus" data-toggle="counter-up">3</h3>
+                            <p>Komoditas Buah</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="facts-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <div class="facts-text">
+                            <h3 class="facts-dollar" data-toggle="counter-up">2024</h3>
+                            <p>Basis Data BPS</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="facts-item">
+                        <i class="fas fa-temperature-high"></i>
+                        <div class="facts-text">
+                            <h3 class="facts-dollar" data-toggle="counter-up">3</h3>
+                            <p>Zona Agroklimat</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="causes" id="statistics">
+        <div class="container">
+            <div class="section-header text-center">
+                <p>Statistik Unggulan</p>
+                <h2>Sentra Produksi Terbesar (2024)</h2>
+            </div>
+            <div class="owl-carousel causes-carousel">
+
+                <div class="causes-item shadow-effect">
+                    <div class="causes-img">
+                        <img src="rambutan.jpeg" alt="Rambutan" onerror="this.src='rambutan.jpeg';">
+                    </div>
+                    <div class="causes-progress">
+                        <div class="progress">
+                            <div class="progress-bar bg-rambutan" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <span><i class="fas fa-trophy"></i> Top 1</span>
+                            </div>
+                        </div>
+                        <div class="progress-text">
+                            <p><strong>Wilayah:</strong> Bantarbolang</p>
+                            <p><strong>Total:</strong> 50.254</p>
+                        </div>
+                    </div>
+                    <div class="causes-text">
+                        <h3 style="color: #FDBE33;">Rambutan</h3>
+                        <p id="desc-1">
+                            Kecamatan bantarbolang menjadi sentra penghasil Rambutan terbesar. Kondisi lembab dan dataran menengah sangat mendukung produktivitas tanaman ini sepanjang tahun sehingga hasil panen melimpah.
+                        </p>
+                        <span class="read-more-link" onclick="toggleText('desc-1', this)">Selengkapnya...</span>
+                    </div>
+                    <div class="causes-btn">
+                        <a class="btn btn-custom" href="map.html">Lihat Sebaran</a>
+                    </div>
+                </div>
+
+                <div class="causes-item shadow-effect">
+                    <div class="causes-img">
+                        <img src="mangga.jpeg" alt="Mangga" onerror="this.src='mangga.jpeg';">
+                    </div>
+                    <div class="causes-progress">
+                        <div class="progress">
+                            <div class="progress-bar bg-mangga" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                                <span><i class="fas fa-medal"></i> Unggulan</span>
+                            </div>
+                        </div>
+                        <div class="progress-text">
+                            <p><strong>Wilayah:</strong> Kec. Taman</p>
+                            <p><strong>Total:</strong> 73.649 Kw</p>
+                        </div>
+                    </div>
+                    <div class="causes-text">
+                        <h3 style="color: #e31a1c;">Mangga</h3>
+                        <p id="desc-2">
+                            Wilayah Taman mendominasi produksi Mangga. Suhu panas di dataran rendah pesisir memicu pembungaan yang optimal, menjadikan mangga dari daerah ini sangat manis dan berkualitas tinggi.
+                        </p>
+                        <span class="read-more-link" onclick="toggleText('desc-2', this)">Selengkapnya...</span>
+                    </div>
+                    <div class="causes-btn">
+                        <a class="btn btn-custom" href="map.html">Lihat Sebaran</a>
+                    </div>
+                </div>
+
+                <div class="causes-item shadow-effect">
+                    <div class="causes-img">
+                        <img src="alpukat.jpeg" alt="Alpukat" onerror="this.src='alpukat.jpeg';">
+                    </div>
+                    <div class="causes-progress">
+                        <div class="progress">
+                            <div class="progress-bar bg-alpukat" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                                <span><i class="fas fa-leaf"></i> Potensial</span>
+                            </div>
+                        </div>
+                        <div class="progress-text">
+                            <p><strong>Wilayah:</strong> Kec. Belik</p>
+                            <p><strong>Total:</strong> 34.560 Kw</p>
+                        </div>
+                    </div>
+                    <div class="causes-text">
+                        <h3 style="color: #33a02c;">Alpukat</h3>
+                        <p id="desc-3">
+                            Selain Rambutan, Belik & Watukumpul menjadi pusat Alpukat karena elevasi tanah tinggi yang sejuk. Varietas mentega sangat cocok dikembangkan di wilayah pegunungan ini.
+                        </p>
+                        <span class="read-more-link" onclick="toggleText('desc-3', this)">Selengkapnya...</span>
+                    </div>
+                    <div class="causes-btn">
+                        <a class="btn btn-custom" href="map.html">Lihat Sebaran</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleText(elementId, btnElement) {
+            var textElement = document.getElementById(elementId);
+            if (textElement.classList.contains('expanded')) {
+                textElement.classList.remove('expanded');
+                btnElement.innerHTML = "Selengkapnya...";
+            } else {
+                textElement.classList.add('expanded');
+                btnElement.innerHTML = "Tutup";
+            }
+        }
+    </script>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-6">
+                    <div class="footer-contact">
+                        <h2>SIG Pemalang</h2>
+                        <p style="color: #dcdcdc; font-size: 14px; line-height: 1.8; margin-bottom: 20px;">
+                            Sistem Informasi Geografis pemetaan potensi tanaman buah (Alpukat, Mangga, Rambutan) di Kabupaten Pemalang untuk mendukung perencanaan pertanian berbasis wilayah.
+                        </p>
+                        <p><i class="fa fa-map-marker-alt"></i> Pemalang, Jawa Tengah</p>
+                        <p><i class="fa fa-phone-alt"></i> +62 851 5607 4723</p>
+                        <p><i class="fa fa-envelope"></i> rohmanfatkhul946@gmail.com</p>
+                        <div class="footer-social">
+                            <a class="btn btn-custom" href="https://www.instagram.com/fatkhulrhm?igsh=MWJtb2Z0ajJtZnhqYQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-custom" href="https://youtube.com/@03.amirilfatkhulrohman28?si=WrrSbTO9J5W5Aj5X" target="_blank"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-link">
+                        <h2>Menu Utama</h2>
+                        <a href="index.html">Beranda</a>
+                        <a href="#about">Latar Belakang</a>
+                        <a href="map.html">Peta Interaktif</a>
+                        <a href="kontak.html">Kontak</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-link">
+                        <h2>Tautan Terkait</h2>
+                        <a href="https://pemalangkab.bps.go.id" target="_blank">BPS Kab. Pemalang</a>
+                        <a href="#">Dinas Pertanian</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container copyright">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; <a href="#">SIG Pemalang</a>, All Right Reserved.</p>
+                </div>
+                <div class="col-md-6">
+                    <p>Developed By <a href="#">Amiril Fatkhul Rohman</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <div id="loader" class="show">
+        <div class="loader"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/parallax/parallax.min.js"></script>
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

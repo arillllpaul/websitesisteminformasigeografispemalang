@@ -1,0 +1,776 @@
+/* =========================================
+   STYLE KHUSUS MAP DASHBOARD (map.html)
+   ========================================= */
+
+
+/* --- 1. GENERAL & TYPOGRAPHY --- */
+
+body {
+    color: #777777;
+    font-weight: 500;
+    background: #f4f4f9;
+    /* Background sedikit abu agar peta kontras */
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #4a4c70;
+}
+
+a {
+    color: #4a4c70;
+    transition: .3s;
+}
+
+a:hover {
+    color: #FDBE33;
+    text-decoration: none;
+}
+
+.container-fluid {
+    max-width: 100%;
+    padding: 0;
+}
+
+
+/* --- 2. NAVBAR (KHUSUS PETA - SELALU GELAP) --- */
+
+.navbar {
+    position: relative;
+    width: 100%;
+    background: #20212B !important;
+    /* Warna Gelap Wajib */
+    padding: 15px 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff !important;
+    font-weight: 600;
+    padding: 10px 15px;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #FDBE33 !important;
+}
+
+
+/* --- 3. PAGE HEADER (KHUSUS PETA - GRADIENT) --- */
+
+.page-header {
+    background: linear-gradient(to right, #2c3e50, #3498db);
+    padding: 30px 0;
+    margin-bottom: 0;
+    border-bottom: 5px solid #FDBE33;
+    text-align: center;
+    color: white;
+}
+
+.page-header h2 {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.page-header p {
+    color: #f1f1f1;
+    margin-top: 5px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+
+/* --- 4. DASHBOARD LAYOUT (SIDEBAR + PETA) --- */
+
+.dashboard-container {
+    display: flex;
+    height: 80vh;
+    /* Tinggi fix agar tidak scroll berlebih */
+    width: 100%;
+    margin-top: 0;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+
+/* Sidebar Kiri */
+
+.sidebar-map {
+    width: 300px;
+    flex-shrink: 0;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ddd;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    background: #20212B;
+    color: #FDBE33;
+    padding: 20px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 1px;
+    border-bottom: 4px solid #FDBE33;
+}
+
+
+/* Panel Info Warna */
+
+.info-panel {
+    background: #f8f9fa;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.info-item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.color-dot {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    margin-right: 10px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+
+/* --- FIX AGAR LOMPATAN ID TIDAK KETUTUP NAVBAR --- */
+
+#tabel-data {
+    scroll-margin-top: 100px;
+    /* Memberi jarak aman dari atas saat dilompati */
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Efek geser halus (scrolling) */
+}
+
+
+/* List Kecamatan */
+
+.district-list-container {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.district-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.district-list li {
+    padding: 12px 20px;
+    border-bottom: 1px solid #f1f1f1;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #555;
+}
+
+.district-list li:hover {
+    background-color: #FDBE33;
+    color: #20212B;
+    padding-left: 25px;
+    font-weight: 600;
+}
+
+
+/* Area Peta */
+
+#map {
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-color: #f4f4f4;
+}
+
+
+/* --- 5. LEAFLET CUSTOM CONTROLS --- */
+
+.leaflet-control-home {
+    background: #fff;
+    padding: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.leaflet-control-home:hover {
+    background-color: #f4f4f4;
+    color: #000;
+}
+
+.legend {
+    background: white;
+    padding: 12px;
+    line-height: 18px;
+    color: #333;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    font-size: 12px;
+    min-width: 150px;
+}
+
+.legend h4 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    color: #20212B;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.9;
+    border: 1px solid #999;
+}
+
+
+/* Tooltip Label Peta */
+
+.label-style {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    font-weight: 700;
+    text-shadow: 2px 2px 0px #fff, -1px -1px 0 #fff;
+    font-size: 11px;
+    color: #20212B;
+}
+
+
+/* --- 6. KESIMPULAN SECTION --- */
+
+.conclusion-section {
+    background: #fff;
+    padding: 40px 20px;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.conclusion-box {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #f8f9fa;
+    border-left: 5px solid #FDBE33;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+
+/* =========================================
+   STYLE DATA TABEL & KESIMPULAN (BARU)
+   ========================================= */
+
+.data-analysis-section {
+    background: #f4f4f9;
+    padding: 60px 0;
+    border-top: 1px solid #ddd;
+}
+
+.divider {
+    border-top: 1px solid #ddd;
+    width: 50%;
+    margin: 40px auto;
+    opacity: 0.5;
+}
+
+
+/* --- 1. STYLE TABEL DATA --- */
+
+.shadow-effect {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    border: 1px solid #eee;
+}
+
+.custom-table {
+    margin-bottom: 0;
+}
+
+.custom-table thead th {
+    background-color: #20212B;
+    /* Header Gelap */
+    color: #FDBE33;
+    /* Teks Emas */
+    border: none;
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.custom-table tbody td {
+    vertical-align: middle;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #555;
+    text-align: center;
+}
+
+
+/* Highlight Angka Tertinggi (Opsional) */
+
+.highlight-red {
+    color: #e31a1c;
+    font-weight: 700;
+    background: rgba(227, 26, 28, 0.1);
+    border-radius: 4px;
+}
+
+.highlight-yellow {
+    color: #d4b106;
+    font-weight: 700;
+    background: rgba(253, 190, 51, 0.1);
+    border-radius: 4px;
+}
+
+.highlight-green {
+    color: #33a02c;
+    font-weight: 700;
+    background: rgba(51, 160, 44, 0.1);
+    border-radius: 4px;
+}
+
+
+/* --- 2. TOMBOL SUMBER BPS --- */
+
+.btn-bps {
+    background: transparent;
+    color: #20212B;
+    border: 2px solid #20212B;
+    padding: 10px 25px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.btn-bps:hover {
+    background: #20212B;
+    color: #FDBE33;
+}
+
+
+/* --- 3. KOTAK KESIMPULAN (REVISI) --- */
+
+.conclusion-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    gap: 30px;
+    border-left: 5px solid #FDBE33;
+    /* Aksen Emas di kiri */
+}
+
+.conclusion-icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: #FFF8E5;
+    /* Kuning muda */
+    color: #FDBE33;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.conclusion-content h4 {
+    color: #20212B;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.conclusion-content p {
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+
+/* List Kesimpulan dengan Titik Warna */
+
+.conclusion-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.conclusion-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    background: #fcfcfc;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+}
+
+.conclusion-list li:last-child {
+    margin-bottom: 0;
+}
+
+.conclusion-list .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 6px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.conclusion-list .dot.red {
+    background: #e31a1c;
+    box-shadow: 0 0 0 4px rgba(227, 26, 28, 0.2);
+}
+
+.conclusion-list .dot.yellow {
+    background: #FFD700;
+    box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.2);
+}
+
+.conclusion-list .dot.green {
+    background: #33a02c;
+    box-shadow: 0 0 0 4px rgba(51, 160, 44, 0.2);
+}
+
+
+/* --- UPDATE TABLE SCROLL --- */
+
+.table-responsive {
+    max-height: 500px;
+    /* Batasi tinggi tabel */
+    overflow-y: auto;
+    /* Munculkan scrollbar jika data panjang */
+    display: block;
+}
+
+
+/* Agar Header Tabel Tetap Diam saat Scroll (Sticky Header) */
+
+.custom-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+    /* Bayangan halus di bawah header */
+}
+
+
+/* Responsif di HP */
+
+@media (max-width: 768px) {
+    .conclusion-box {
+        flex-direction: column;
+        padding: 25px;
+    }
+    .conclusion-icon {
+        margin: 0 auto;
+    }
+    .conclusion-content h4,
+    .conclusion-content p {
+        text-align: center;
+    }
+}
+
+
+/* --- 7. FOOTER (KHUSUS PETA) --- */
+
+.footer {
+    position: relative;
+    margin-top: 30px;
+    /* Jarak aman dari konten atas */
+    padding-top: 50px;
+    /* Jarak dalam atas */
+    padding-bottom: 0 !important;
+    /* PENTING: Hilangkan ruang bawah agar copyright nempel */
+    background: #20212B;
+    color: #ffffff;
+    border-top: 10px solid #FDBE33;
+    /* Garis aksen emas tebal */
+}
+
+
+/* --- Judul Kolom (H2) --- */
+
+.footer h2 {
+    position: relative;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #FDBE33;
+    text-transform: uppercase;
+}
+
+
+/* Garis dekoratif di bawah judul */
+
+.footer h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background: #FDBE33;
+}
+
+
+/* --- Kontak Info & Link Container --- */
+
+
+/* Mengatur jarak bawah kolom agar tidak mendorong copyright terlalu jauh */
+
+.footer .footer-contact,
+.footer .footer-link {
+    position: relative;
+    margin-bottom: 20px;
+    /* Jarak secukupnya sebelum copyright */
+    color: #ffffff;
+}
+
+
+/* --- Styling Paragraf Kontak --- */
+
+.footer .footer-contact p {
+    margin-bottom: 15px;
+    color: #dddddd;
+    font-size: 15px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.footer .footer-contact i {
+    width: 25px;
+    color: #FDBE33;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+
+/* --- Social Media Buttons --- */
+
+.footer-social {
+    margin-top: 25px;
+    display: flex;
+}
+
+.footer-social .btn-custom {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #FDBE33;
+    font-size: 16px;
+    margin-right: 10px;
+    transition: all 0.3s;
+}
+
+.footer-social .btn-custom:hover {
+    background: #FDBE33;
+    color: #20212B;
+    border-color: #FDBE33;
+    transform: translateY(-3px);
+}
+
+
+/* --- Link Navigasi --- */
+
+.footer .footer-link a {
+    display: block;
+    margin-bottom: 12px;
+    color: #dddddd;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.footer .footer-link a:hover {
+    color: #FDBE33;
+    padding-left: 8px;
+}
+
+
+/* Panah kecil saat hover */
+
+.footer .footer-link a::before {
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 0;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.footer .footer-link a:hover::before {
+    margin-right: 8px;
+    opacity: 1;
+}
+
+
+/* --- COPYRIGHT SECTION (RAPAT) --- */
+
+
+/* --- 8. RESPONSIVE --- */
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+        height: auto;
+    }
+    .sidebar-map {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+    .district-list-container {
+        max-height: 200px;
+    }
+    #map {
+        height: 500px;
+        width: 100%;
+    }
+}
+
+
+/* Tambahkan ini di bagian paling bawah css/map.css */
+
+@media (max-width: 768px) {
+    /* 1. Atur container agar menumpuk ke bawah */
+    .dashboard-container {
+        flex-direction: column;
+        height: auto;
+        /* Biarkan tinggi menyesuaikan isi */
+    }
+    /* 2. Beri batas tinggi untuk daftar kecamatan agar tidak terlalu panjang */
+    .district-list-container {
+        max-height: 250px;
+        /* Maksimal tinggi list, sisanya di-scroll */
+    }
+    /* 3. INI YANG PENTING: Beri tinggi pasti untuk peta di HP */
+    #map {
+        height: 400px;
+        /* Atau 50vh. Peta WAJIB punya tinggi di sini */
+        width: 100%;
+    }
+    /* Opsional: Hapus border kanan sidebar di mode mobile */
+    .sidebar-map {
+        width: 100%;
+        height: auto;
+        border-right: none;
+    }
+}
+
+
+/* =========================================
+   PENYELAMAT WARNA FOOTER (PASTE DI PALING BAWAH MAP.CSS)
+   ========================================= */
+
+
+/* 1. Paksa semua teks di dalam footer jadi Putih Terang */
+
+.footer,
+.footer .footer-contact,
+.footer .footer-link,
+.footer p,
+.footer span {
+    color: #eeeeee !important;
+}
+
+
+/* 2. Paksa Link jadi Abu Terang (Bukan Biru/Hitam) */
+
+.footer a,
+.footer .footer-link a {
+    color: #dddddd !important;
+    text-decoration: none;
+}
+
+
+/* 3. Efek saat Link disentuh (Hover) jadi Emas */
+
+.footer a:hover,
+.footer .footer-link a:hover {
+    color: #FDBE33 !important;
+}
+
+
+/* 4. Paksa Ikon (Map, Phone, Email) jadi Emas */
+
+.footer i,
+.footer .fa,
+.footer .fas,
+.footer .fab {
+    color: #FDBE33 !important;
+}
+
+
+/* 5. Judul Kolom jadi Emas */
+
+.footer h2 {
+    color: #FDBE33 !important;
+}
+
+
+/* 6. Background Copyright Gelap */

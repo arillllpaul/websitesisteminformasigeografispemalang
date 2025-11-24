@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <title>Kontak Kami - SIG Pemalang</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* --- GENERAL SETTINGS --- */
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f4f4f9;
+            color: #777;
+        }
+        /* --- TOP BAR (Baris Kecil di Atas) --- */
+        
+        .top-bar {
+            background: #20212B;
+            /* Navy Blue */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0;
+            height: 45px;
+            font-size: 14px;
+        }
+        
+        .top-bar .text {
+            display: flex;
+            align-items: center;
+            height: 45px;
+            color: #ffffff;
+        }
+        
+        .top-bar .text i {
+            margin-right: 8px;
+            color: #FDBE33;
+            /* Emas */
+        }
+        
+        .top-bar .social {
+            display: flex;
+            justify-content: flex-end;
+            height: 45px;
+        }
+        
+        .top-bar .social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 100%;
+            color: #FDBE33;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            transition: .3s;
+        }
+        
+        .top-bar .social a:hover {
+            background: #FDBE33;
+            color: #20212B;
+        }
+        /* --- NAVBAR (Menu Utama) --- */
+        
+        .navbar {
+            background: #20212B !important;
+            /* Navy Blue */
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            color: #ffffff !important;
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff !important;
+            font-weight: 600;
+            padding: 10px 15px;
+            transition: .3s;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link:hover,
+        .navbar-dark .navbar-nav .nav-link.active {
+            color: #FDBE33 !important;
+            /* Warna Emas saat aktif */
+        }
+        /* --- PAGE HEADER (Judul Halaman) --- */
+        
+        .page-header {
+            background: linear-gradient(rgba(32, 33, 43, 0.9), rgba(32, 33, 43, 0.9)), url('buuah.jpeg');
+            /* Pastikan ada gambar background atau pakai warna solid */
+            background-position: center;
+            background-size: cover;
+            padding: 60px 0;
+            margin-bottom: 45px;
+            text-align: center;
+        }
+        
+        .page-header h2 {
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .page-header p {
+            color: #FDBE33;
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        /* --- CONTACT SECTION STYLE --- */
+        
+        .contact {
+            padding-bottom: 60px;
+        }
+        /* Form Style */
+        
+        .contact-form {
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+            height: 100%;
+        }
+        
+        .contact-form .form-control {
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #e1e1e1;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .contact-form .form-control:focus {
+            box-shadow: none;
+            border-color: #FDBE33;
+        }
+        
+        .contact-form textarea.form-control {
+            height: 150px;
+            resize: none;
+        }
+        
+        .btn-custom {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            color: #FDBE33;
+            border: 2px solid #FDBE33;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: .3s;
+            cursor: pointer;
+        }
+        
+        .btn-custom:hover {
+            background: #FDBE33;
+            color: #20212B;
+        }
+        /* Info Style */
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #FDBE33;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFF8E5;
+            color: #FDBE33;
+            font-size: 20px;
+            border-radius: 50%;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .contact-text h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #20212B;
+            margin-bottom: 5px;
+        }
+        
+        .contact-text p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        /* Map Style */
+        
+        .contact-map {
+            width: 100%;
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+        
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        /* Footer Simpel */
+        
+        .footer-simple {
+            background: #20212B;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 5px solid #FDBE33;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar d-none d-md-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text">
+                        <i class="fa fa-envelope"></i> rohmanfatkhul@gmail.com
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="social">
+                        <a href="https://www.instagram.com/fatkhulrhm?igsh=MWJtb2Z0ajJtZnhqYQ=="><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@03.amirilfatkhulrohman28?si=WrrSbTO9J5W5Aj5X"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">PML</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                    <a href="index.html" class="nav-item nav-link">Beranda</a>
+                    <a href="index.html#about" class="nav-item nav-link">Latar Belakang</a>
+                    <a href="map.html" class="nav-item nav-link">Peta Interaktif</a>
+                    <a href="kontak.html" class="nav-item nav-link active">Kontak</a> </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <div class="container">
+            <h2>Hubungi Kami</h2>
+            <p>Pertanyaan, Saran, dan Masukan</p>
+        </div>
+    </div>
+
+    <div class="contact">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-7 col-md-6 mb-4">
+                    <div class="contact-form">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Nama Lengkap" required="required" />
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" placeholder="Email Anda" required="required" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" class="form-control" placeholder="Subjek Pesan" required="required" />
+                            </div>
+                            <div class="control-group">
+                                <textarea class="form-control" placeholder="Tulis Pesan Anda di sini..." required="required"></textarea>
+                            </div>
+                            <div>
+                                <button class="btn-custom" type="submit">Kirim Pesan Sekarang</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-6">
+                    <div class="contact-info">
+
+                        <div class="contact-info">
+
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="contact-text">
+                                    <h3>Kantor Pusat</h3>
+                                    <p>Pemalang, Jawa Tengah, Indonesia</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <div class="contact-text">
+                                    <h3>Telepon / WhatsApp</h3>
+                                    <p>+62 851 5607 4723</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div class="contact-text">
+                                    <h3>Email Resmi</h3>
+                                    <p>rohmanfatkhul@gmail.com</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-map">
+                                <iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Kabupaten+Pemalang&t=&z=10&ie=UTF8&iwloc=&output=embed">
+        </iframe>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-simple">
+        <div class="container">
+            <p>&copy; 2024 SIG Pemalang. Developed By Amiril Fatkhul Rohman.</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
