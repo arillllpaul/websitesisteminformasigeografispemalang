@@ -12,232 +12,167 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <style>
-        /* --- GENERAL SETTINGS --- */
-        
+        /* --- 1. GLOBAL SETTINGS --- */
         body {
             font-family: 'Quicksand', sans-serif;
-            background-color: #f4f4f9;
-            color: #777;
+            background-color: #f4f6f9;
+            color: #555;
         }
-        /* --- TOP BAR (Baris Kecil di Atas) --- */
-        
+
+        /* --- 2. TOP BAR & NAVBAR --- */
         .top-bar {
             background: #20212B;
-            /* Navy Blue */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             height: 45px;
             font-size: 14px;
         }
         
-        .top-bar .text {
-            display: flex;
-            align-items: center;
-            height: 45px;
-            color: #ffffff;
-        }
-        
-        .top-bar .text i {
-            margin-right: 8px;
-            color: #FDBE33;
-            /* Emas */
-        }
-        
-        .top-bar .social {
-            display: flex;
-            justify-content: flex-end;
-            height: 45px;
-        }
-        
+        .top-bar .text { display: flex; align-items: center; height: 45px; color: #eee; }
+        .top-bar .text i { margin-right: 8px; color: #FDBE33; }
+        .top-bar .social { display: flex; justify-content: flex-end; height: 45px; }
         .top-bar .social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 100%;
-            color: #FDBE33;
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-            transition: .3s;
+            display: flex; align-items: center; justify-content: center;
+            width: 40px; height: 100%; color: #FDBE33;
+            border-left: 1px solid rgba(255, 255, 255, 0.1); transition: .3s;
         }
-        
-        .top-bar .social a:hover {
-            background: #FDBE33;
-            color: #20212B;
-        }
-        /* --- NAVBAR (Menu Utama) --- */
-        
-        .navbar {
-            background: #20212B !important;
-            /* Navy Blue */
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .navbar-brand {
-            color: #ffffff !important;
-            font-size: 30px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        
-        .navbar-dark .navbar-nav .nav-link {
-            color: #ffffff !important;
-            font-weight: 600;
-            padding: 10px 15px;
-            transition: .3s;
-        }
-        
-        .navbar-dark .navbar-nav .nav-link:hover,
-        .navbar-dark .navbar-nav .nav-link.active {
-            color: #FDBE33 !important;
-            /* Warna Emas saat aktif */
-        }
-        /* --- PAGE HEADER (Judul Halaman) --- */
-        
+        .top-bar .social a:hover { background: #FDBE33; color: #20212B; }
+
+        .navbar { background: #20212B !important; padding: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .navbar-brand { color: #fff !important; font-size: 28px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+        .navbar-dark .navbar-nav .nav-link { color: #fff !important; font-weight: 500; padding: 10px 15px; transition: .3s; }
+        .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link.active { color: #FDBE33 !important; }
+
+        /* --- 3. PAGE HEADER --- */
         .page-header {
-            background: linear-gradient(rgba(32, 33, 43, 0.9), rgba(32, 33, 43, 0.9)), url('buuah.jpeg');
-            /* Pastikan ada gambar background atau pakai warna solid */
+            /* Ganti url gambar sesuai file Anda, saya beri overlay gradasi agar teks terbaca */
+            background: linear-gradient(rgba(32, 33, 43, 0.85), rgba(32, 33, 43, 0.85)), url('buuah.jpeg');
             background-position: center;
             background-size: cover;
-            padding: 60px 0;
-            margin-bottom: 45px;
+            padding: 80px 0;
             text-align: center;
+            color: white;
+            margin-bottom: 50px;
         }
         
-        .page-header h2 {
-            color: #ffffff;
-            font-size: 40px;
-            font-weight: 700;
-            margin: 0;
+        .page-header h2 { font-size: 45px; font-weight: 700; margin-bottom: 10px; }
+        .page-header p { font-size: 18px; color: #FDBE33; font-weight: 500; letter-spacing: 1px; }
+
+        /* --- 4. CONTACT WRAPPER (MODERN SPLIT DESIGN) --- */
+        .contact-wrapper {
+            background: #fff;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 60px;
         }
-        
-        .page-header p {
-            color: #FDBE33;
-            font-size: 18px;
-            margin-top: 10px;
-            font-weight: 600;
-        }
-        /* --- CONTACT SECTION STYLE --- */
-        
-        .contact {
-            padding-bottom: 60px;
-        }
-        /* Form Style */
-        
-        .contact-form {
-            padding: 30px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+
+        /* Bagian Kiri: Info Kontak (Gelap) */
+        .contact-info-sec {
+            background: #20212B; /* Navy Blue */
+            padding: 50px 40px;
+            color: white;
             height: 100%;
+            position: relative;
         }
+
+        .contact-info-sec h3 { color: #FDBE33; font-weight: 700; margin-bottom: 30px; font-size: 24px; }
         
-        .contact-form .form-control {
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid #e1e1e1;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-        
-        .contact-form .form-control:focus {
-            box-shadow: none;
-            border-color: #FDBE33;
-        }
-        
-        .contact-form textarea.form-control {
-            height: 150px;
-            resize: none;
-        }
-        
-        .btn-custom {
-            width: 100%;
-            padding: 15px;
-            background: transparent;
-            color: #FDBE33;
-            border: 2px solid #FDBE33;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: .3s;
-            cursor: pointer;
-        }
-        
-        .btn-custom:hover {
-            background: #FDBE33;
-            color: #20212B;
-        }
-        /* Info Style */
-        
-        .contact-item {
+        .info-item {
             display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-            border-left: 5px solid #FDBE33;
-            transition: all 0.3s;
+            align-items: flex-start;
+            margin-bottom: 30px;
         }
         
-        .contact-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .contact-item i {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #FFF8E5;
+        .info-item i {
+            width: 45px; height: 45px;
+            background: rgba(253, 190, 51, 0.15); /* Emas Transparan */
             color: #FDBE33;
-            font-size: 20px;
             border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
             margin-right: 20px;
             flex-shrink: 0;
         }
         
-        .contact-text h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #20212B;
-            margin-bottom: 5px;
-        }
-        
-        .contact-text p {
-            margin: 0;
-            color: #666;
-            font-size: 14px;
-        }
-        /* Map Style */
-        
-        .contact-map {
-            width: 100%;
-            height: 250px;
-            border-radius: 8px;
+        .info-item h5 { font-size: 16px; font-weight: 600; margin-bottom: 5px; color: #fff; }
+        .info-item p { font-size: 14px; color: #ccc; margin: 0; line-height: 1.6; }
+
+        /* Peta Mini di dalam Info */
+        .mini-map {
+            margin-top: 40px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            border: 1px solid #ddd;
+            border: 2px solid #FDBE33;
+            height: 200px;
         }
-        
-        .contact-map iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
+
+        /* Bagian Kanan: Form (Putih) */
+        .contact-form-sec {
+            padding: 50px 40px;
         }
-        /* Footer Simpel */
+
+        .contact-form-sec h3 {
+            color: #20212B;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .contact-form-sec p { color: #888; margin-bottom: 30px; font-size: 15px; }
+
+        .form-group { margin-bottom: 25px; }
         
-        .footer-simple {
+        .form-control {
+            height: 50px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #e1e1e1;
+            background: #f9f9f9;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            background: #fff;
+            border-color: #FDBE33;
+            box-shadow: 0 0 10px rgba(253, 190, 51, 0.2);
+        }
+
+        textarea.form-control { height: 150px; resize: none; padding-top: 15px; }
+
+        .btn-submit {
+            background: #FDBE33;
+            color: #20212B;
+            font-weight: 700;
+            padding: 15px 40px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(253, 190, 51, 0.3);
+        }
+
+        .btn-submit:hover {
             background: #20212B;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-            margin-top: 60px;
+            color: #FDBE33;
+            transform: translateY(-2px);
+        }
+
+        /* --- 5. FOOTER MODERN --- */
+        .footer-modern {
+            background-color: #212529;
+            color: #adb5bd;
+            padding: 40px 0;
             border-top: 5px solid #FDBE33;
         }
+        .footer-modern h5 { color: #fff; font-weight: 700; margin-bottom: 15px; }
+        .footer-modern a { color: #adb5bd; text-decoration: none; transition: 0.3s; }
+        .footer-modern a:hover { color: #FDBE33; }
+        .copyright-text { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #343a40; font-size: 14px; }
+
     </style>
 </head>
 
@@ -253,17 +188,17 @@
                 </div>
                 <div class="col-md-6">
                     <div class="social">
-                        <a href="https://www.instagram.com/fatkhulrhm?igsh=MWJtb2Z0ajJtZnhqYQ=="><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com/@03.amirilfatkhulrohman28?si=WrrSbTO9J5W5Aj5X"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/fatkhulrhm"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@03.amirilfatkhulrohman28"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="navbar navbar-expand-lg navbar-dark">
+    <div class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a href="index.html" class="navbar-brand">PML</a>
+            <a href="index.html" class="navbar-brand"><i class="fas fa-leaf text-warning mr-2"></i> SIG PEMALANG</a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -273,7 +208,8 @@
                     <a href="index.html" class="nav-item nav-link">Beranda</a>
                     <a href="index.html#about" class="nav-item nav-link">Latar Belakang</a>
                     <a href="map.html" class="nav-item nav-link">Peta Interaktif</a>
-                    <a href="kontak.html" class="nav-item nav-link active">Kontak</a> </div>
+                    <a href="kontak.html" class="nav-item nav-link active">Kontak</a>
+                </div>
             </div>
         </div>
     </div>
@@ -281,74 +217,82 @@
     <div class="page-header">
         <div class="container">
             <h2>Hubungi Kami</h2>
-            <p>Pertanyaan, Saran, dan Masukan</p>
+            <p>Kami siap mendengar saran dan pertanyaan Anda</p>
         </div>
     </div>
 
-    <div class="contact">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-7 col-md-6 mb-4">
-                    <div class="contact-form">
-                        <form>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" placeholder="Nama Lengkap" required="required" />
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="email" class="form-control" placeholder="Email Anda" required="required" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <input type="text" class="form-control" placeholder="Subjek Pesan" required="required" />
-                            </div>
-                            <div class="control-group">
-                                <textarea class="form-control" placeholder="Tulis Pesan Anda di sini..." required="required"></textarea>
-                            </div>
+    <div class="container">
+        <div class="contact-wrapper">
+            <div class="row no-gutters">
+                
+                <div class="col-lg-5">
+                    <div class="contact-info-sec">
+                        <h3>Informasi Kontak</h3>
+                        <p style="color: #ccc; margin-bottom: 30px;">
+                            Jika Anda memiliki pertanyaan mengenai data hortikultura atau kendala pada WebGIS, silakan hubungi kami melalui saluran berikut.
+                        </p>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
                             <div>
-                                <button class="btn-custom" type="submit">Kirim Pesan Sekarang</button>
+                                <h5>Alamat Kampus</h5>
+                                <p>Fakultas Teknik & Informatika,<br>Universitas PGRI Semarang</p>
                             </div>
-                        </form>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h5>Telepon / WhatsApp</h5>
+                                <p>+62 851 5607 4723</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h5>Email Resmi</h5>
+                                <p>rohmanfatkhul@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="mini-map">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126685.24430752115!2d109.3090408466649!3d-6.892742915833215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fc4b223000001%3A0x3027a76e352bb80!2sKabupaten%20Pemalang%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1709623821000!5m2!1sid!2sid" 
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                            </iframe>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="col-lg-5 col-md-6">
-                    <div class="contact-info">
-
-                        <div class="contact-info">
-
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div class="contact-text">
-                                    <h3>Kantor Pusat</h3>
-                                    <p>Pemalang, Jawa Tengah, Indonesia</p>
+                <div class="col-lg-7">
+                    <div class="contact-form-sec">
+                        <h3>Kirim Pesan</h3>
+                        <p>Isi formulir di bawah ini untuk mengirimkan pesan langsung kepada kami.</p>
+                        
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" placeholder="Nama Lengkap" required>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="email" class="form-control" placeholder="Alamat Email" required>
                                 </div>
                             </div>
-
-                            <div class="contact-item">
-                                <i class="fas fa-phone-alt"></i>
-                                <div class="contact-text">
-                                    <h3>Telepon / WhatsApp</h3>
-                                    <p>+62 851 5607 4723</p>
-                                </div>
+                            
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Subjek / Judul Pesan" required>
                             </div>
-
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <div class="contact-text">
-                                    <h3>Email Resmi</h3>
-                                    <p>rohmanfatkhul@gmail.com</p>
-                                </div>
+                            
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Tulis pesan Anda secara detail di sini..." required></textarea>
                             </div>
-
-                            <div class="contact-map">
-                                <iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Kabupaten+Pemalang&t=&z=10&ie=UTF8&iwloc=&output=embed">
-        </iframe>
-                            </div>
-
-                        </div>
-
+                            
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-paper-plane mr-2"></i> Kirim Pesan Sekarang
+                            </button>
+                        </form>
                     </div>
                 </div>
 
@@ -356,15 +300,36 @@
         </div>
     </div>
 
-    <div class="footer-simple">
+    <footer class="footer-modern">
         <div class="container">
-            <p>&copy; 2024 SIG Pemalang. Developed By Amiril Fatkhul Rohman.</p>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5><i class="fas fa-leaf text-warning"></i> SIG PEMALANG</h5>
+                    <p>Sistem Informasi Geografis berbasis web untuk pemetaan potensi hortikultura (Mangga, Rambutan, Alpukat) di Kabupaten Pemalang menggunakan analisis elevasi digital.</p>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>TAUTAN CEPAT</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html"><i class="fas fa-chevron-right mr-2"></i>Beranda</a></li>
+                        <li><a href="map.html"><i class="fas fa-chevron-right mr-2"></i>Peta Interaktif</a></li>
+                        <li><a href="kontak.html"><i class="fas fa-chevron-right mr-2"></i>Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <h5>KONTAK PENGEMBANG</h5>
+                    <p><i class="fas fa-envelope mr-2"></i> rohmanfatkhul946@gmail.com</p>
+                    <p><i class="fas fa-university mr-2"></i> Universitas PGRI Semarang</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> Pemalang, Jawa Tengah</p>
+                </div>
+            </div>
+            <div class="copyright-text">
+                <p class="mb-0">&copy; 2024 <strong>SIG Pemalang</strong>. Developed with <i class="fas fa-heart text-danger"></i> by Amiril Fatkhul Rohman.</p>
+            </div>
         </div>
-    </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>
