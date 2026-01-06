@@ -3,517 +3,649 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Dashboard SIG Pemalang</title>
+    <title>Dashboard SIG Pemalang - Zonasi MDPL & Komoditas</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="css/map.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/leaflet.css">
     <link rel="stylesheet" href="css/qgis2web.css">
     <link rel="stylesheet" href="css/fontawesome-all.min.css">
+    <link href="css/map.css" rel="stylesheet">
 
     <style>
-        /* === PERBAIKAN HEADER & NAVBAR (FIX MASALAH WARNA GELAP) === */
-        /* 1. Memaksa Navbar Menempel di Atas (Tidak Melayang) */
-        /* Tambahan agar saat klik link, posisi scroll pas tidak tertutup navbar */
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+        /* --- HEADER STYLES --- */
         
-        #tabel-data {
-            scroll-margin-top: 100px;
+        .header-map-1 {
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            padding: 40px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
         }
         
-        html {
-            scroll-behavior: smooth;
+        .header-map-2 {
+            background: linear-gradient(135deg, #134E5E, #71B280);
+            padding: 40px 0;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+        /* Paksa Warna Putih Agar Kontras */
+        
+        .header-title {
+            color: #ffffff !important;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .header-desc {
+            color: #f8f9fa !important;
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+        
+        .header-source {
+            color: #ffeb3b !important;
+            font-size: 13px;
+            font-weight: 500;
+            font-style: italic;
+        }
+        /* --- MAP CONTAINER --- */
+        
+        .dashboard-container {
+            position: relative;
+            height: 600px;
+            width: 100%;
+            display: flex;
+        }
+        
+        #map,
+        #map2 {
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        #map {
+            border-bottom: 5px solid #e31a1c;
+        }
+        
+        #map2 {
+            border-top: 5px solid #33a02c;
+        }
+        /* --- SIDEBAR --- */
+        
+        .sidebar-map {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 999;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            max-height: 550px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-header {
+            padding: 15px;
+            font-weight: 700;
+            text-align: center;
+            color: white;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        
+        .header-sidebar-1 {
+            background: #2c3e50;
+        }
+        
+        .header-sidebar-2 {
+            background: #2e7d32;
+        }
+        
+        .info-panel {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        
+        .color-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .district-list-container {
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        
+        .district-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .district-list li {
+            padding: 12px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .district-list li:hover {
+            background-color: #f8f9fa;
+            padding-left: 25px;
+            color: #007bff;
+            font-weight: 600;
+        }
+        /* --- TABLE STYLES --- */
+        
+        .custom-table-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .table thead th {
+            background-color: #343a40;
+            color: white;
+            border: none;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .table tbody td {
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        .table tbody td:first-child {
+            text-align: left;
+            /* Nama Kecamatan Rata Kiri */
+        }
+        /* --- FOOTER PERBAIKAN --- */
+        
+        .footer-modern {
+            background-color: #212529;
+            color: #adb5bd;
+            padding: 40px 0;
+            margin-top: auto;
+            border-top: 5px solid #ffc107;
+            /* Aksen Kuning Emas */
+        }
+        
+        .footer-modern h5 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .footer-modern a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .footer-modern a:hover {
+            color: #ffc107;
+        }
+        
+        .copyright-text {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #343a40;
+            font-size: 14px;
+        }
+        /* Highlights */
+        
+        .highlight-red {
+            background: rgba(227, 26, 28, 0.1);
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .highlight-yellow {
+            background: rgba(255, 215, 0, 0.15);
+            color: #d4ac0d;
+            font-weight: bold;
+        }
+        
+        .highlight-green {
+            background: rgba(51, 160, 44, 0.1);
+            color: #27ae60;
+            font-weight: bold;
+        }
+        /* Popup */
+        
+        .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .popup-header {
+            background: #343a40;
+            color: #ffc107;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .popup-table td,
+        .popup-table th {
+            padding: 5px 10px;
+            font-size: 12px;
+            border-bottom: 1px solid #eee;
         }
     </style>
 </head>
 
 <body>
-    <div class="navbar navbar-expand-lg navbar-dark">
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">PML</a>
+            <a href="index.html" class="navbar-brand"><i class="fas fa-map-marked-alt mr-2"></i> SIG PEMALANG</a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ml-auto">
                     <a href="index.html" class="nav-item nav-link">Beranda</a>
                     <a href="index.html#about" class="nav-item nav-link">Latar Belakang</a>
-                    <a href="map.html" class="nav-item nav-link active">Peta interaktif</a>
+                    <a href="map.html" class="nav-item nav-link active">Peta Interaktif</a>
                     <a href="kontak.html" class="nav-item nav-link">Kontak</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="page-header">
+    <div class="header-map-1">
         <div class="container text-center">
-            <h2 style="color: white; font-size: 32px; font-weight: 700; margin: 0; letter-spacing: 1px;">
-                Dashboard Sebaran Buah
-            </h2>
-            <p style="color: #f1f1f1; margin-top: 5px; font-size: 16px; opacity: 0.9;">
-                Analisis Spasial Berbasis Topografi dan Komoditas
-            </p>
+            <h2 class="header-title"><i class="fas fa-mountain"></i> PETA 1: Analisis Elevasi (MDPL)</h2>
+            <p class="header-desc">Visualisasi Blok Zonasi: Warna Padat Menunjukkan Pembagian Wilayah Tegas</p>
+            <p class="header-source"><i class="fas fa-database"></i> Sumber Data: BPS Kab. Pemalang 2024 & Google Terrain</p>
         </div>
     </div>
 
     <div class="container-fluid px-0">
         <div class="dashboard-container">
             <div class="sidebar-map">
-                <div class="sidebar-header">NAVIGASI WILAYAH</div>
+                <div class="sidebar-header header-sidebar-1">LEGENDA ELEVASI</div>
                 <div class="info-panel">
-                    <strong>Korelasi Topografi & Komoditas:</strong>
-                    <hr style="margin: 5px 0;">
-                    <div class="info-item">
-                        <span class="color-dot" style="background:#e31a1c;"></span>
-                        <div><b>Zona Utara (Panas)</b><br>Cocok: <b>Mangga</b></div>
+                    <div class="info-item"><span class="color-dot" style="background:#e31a1c;"></span>
+                        <div><b>Zona Merah (< 100 mdpl)</b><br>Dataran Rendah</div>
                     </div>
-                    <div class="info-item">
-                        <span class="color-dot" style="background:#FFD700;"></span>
-                        <div><b>Zona Tengah (Sedang)</b><br>Cocok: <b>Rambutan</b></div>
+                    <div class="info-item"><span class="color-dot" style="background:#FFD700;"></span>
+                        <div><b>Zona Kuning (100-400 mdpl)</b><br>Dataran Menengah</div>
                     </div>
-                    <div class="info-item">
-                        <span class="color-dot" style="background:#33a02c;"></span>
-                        <div><b>Zona Selatan (Sejuk)</b><br>Cocok: <b>Alpukat</b></div>
+                    <div class="info-item"><span class="color-dot" style="background:#33a02c;"></span>
+                        <div><b>Zona Hijau (> 400 mdpl)</b><br>Dataran Tinggi</div>
                     </div>
                 </div>
+                <div class="sidebar-header" style="background:#f8f9fa; color:#333; border-top:1px solid #ddd; padding:10px;">DAFTAR KECAMATAN</div>
                 <div class="district-list-container">
                     <ul class="district-list" id="districtList"></ul>
                 </div>
             </div>
-            <div id="map" style="width: 100%; min-height: 400px; z-index: 1;"></div>
+            <div id="map"></div>
         </div>
     </div>
 
-    <div class="data-analysis-section" id="tabel-data">
+    <div class="header-map-2">
+        <div class="container text-center">
+            <h2 class="header-title"><i class="fas fa-leaf"></i> PETA 2: Sebaran Komoditas Hortikultura</h2>
+            <p class="header-desc">Visualisasi Lapangan: Transparan dengan Garis Tepi Tebal untuk Melihat Lahan Asli</p>
+            <p class="header-source"><i class="fas fa-database"></i> Sumber Data: BPS Kab. Pemalang 2024 & Google Satellite</p>
+        </div>
+    </div>
+
+    <div class="container-fluid px-0">
+        <div class="dashboard-container">
+            <div class="sidebar-map">
+                <div class="sidebar-header header-sidebar-2">LEGENDA KOMODITAS</div>
+                <div class="info-panel">
+                    <div class="info-item"><span class="color-dot" style="background:transparent; border: 3px solid #e31a1c;"></span>
+                        <div><b>Mangga</b><br><i>Dataran Rendah</i></div>
+                    </div>
+                    <div class="info-item"><span class="color-dot" style="background:transparent; border: 3px solid #FFD700;"></span>
+                        <div><b>Rambutan</b><br><i>Dataran Menengah</i></div>
+                    </div>
+                    <div class="info-item"><span class="color-dot" style="background:transparent; border: 3px solid #33a02c;"></span>
+                        <div><b>Alpukat</b><br><i>Dataran Tinggi</i></div>
+                    </div>
+                </div>
+                <div class="sidebar-header" style="background:#f8f9fa; color:#333; border-top:1px solid #ddd; padding:10px;">DAFTAR KECAMATAN</div>
+                <div class="district-list-container">
+                    <ul class="district-list" id="districtList2"></ul>
+                </div>
+            </div>
+            <div id="map2"></div>
+        </div>
+    </div>
+
+    <div class="data-analysis-section py-5" style="background: #f8f9fa;">
         <div class="container">
-
-            <div class="row justify-content-center mb-5">
-                <div class="col-lg-10">
-                    <div class="section-header text-center">
-                        <p>Data Tabular</p>
-                        <h2>Data Produksi Buah Tahun 2024</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="text-center mb-4">
+                        <h3 style="font-weight:700; color:#20212B;">Data Produksi Buah & Zonasi 2024</h3>
+                        <p class="text-muted">Rekapitulasi Data BPS Kabupaten Pemalang 2024 (14 Kecamatan)</p>
                     </div>
 
-                    <div class="table-responsive shadow-effect">
-                        <table class="table table-hover custom-table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Kecamatan</th>
-                                    <th><i class="fas fa-leaf"></i> Alpukat (Kw)</th>
-                                    <th><i class="fas fa-fire"></i> Mangga (Kw)</th>
-                                    <th><i class="fas fa-tree"></i> Rambutan (Kw)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td class="font-weight-bold">Pemalang</td>
-                                    <td>19.5</td>
-                                    <td class="highlight-red">22.698</td>
-                                    <td>40</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td class="font-weight-bold">Taman</td>
-                                    <td>77</td>
-                                    <td class="highlight-red">73.649</td>
-                                    <td>1.018</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td class="font-weight-bold">Petarukan</td>
-                                    <td>95</td>
-                                    <td class="highlight-red">27.095</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td class="font-weight-bold">Comal</td>
-                                    <td>0</td>
-                                    <td class="highlight-red">3.050</td>
-                                    <td>49</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td class="font-weight-bold">Ulujami</td>
-                                    <td>0</td>
-                                    <td class="highlight-red">15.484</td>
-                                    <td>0</td>
-                                </tr>
-
-                                <tr>
-                                    <td>6</td>
-                                    <td class="font-weight-bold">Ampelgading</td>
-                                    <td>84</td>
-                                    <td class="highlight-red">31.204</td>
-                                    <td>148</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td class="font-weight-bold">Bodeh</td>
-                                    <td>263</td>
-                                    <td class="highlight-red">1.235</td>
-                                    <td>1.235</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td class="font-weight-bold">Bantarbolang</td>
-                                    <td>60</td>
-                                    <td>3.438</td>
-                                    <td class="highlight-yellow">50.254</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td class="font-weight-bold">Randudongkal</td>
-                                    <td>0</td>
-                                    <td>150</td>
-                                    <td class="highlight-yellow">356</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td class="font-weight-bold">Warungpring</td>
-                                    <td>127</td>
-                                    <td>148</td>
-                                    <td class="highlight-yellow">371</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td class="font-weight-bold">Belik</td>
-                                    <td class="highlight-green">34.560</td>
-                                    <td>491</td>
-                                    <td>23</td>
-                                </tr>
-
-                                <tr>
-                                    <td>12</td>
-                                    <td class="font-weight-bold">Moga</td>
-                                    <td class="highlight-green">1.849</td>
-                                    <td>741</td>
-                                    <td>371</td>
-                                </tr>
-                                <tr>
-                                    <td>13</td>
-                                    <td class="font-weight-bold">Pulosari</td>
-                                    <td class="highlight-green">2.805</td>
-                                    <td>230</td>
-                                    <td>46</td>
-                                </tr>
-                                <tr>
-                                    <td>14</td>
-                                    <td class="font-weight-bold">Watukumpul</td>
-                                    <td class="highlight-green">10.428</td>
-                                    <td>3.441</td>
-                                    <td>910</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="source-link text-center mt-4">
-                        <p class="text-muted mb-2">Ingin melihat data mentah selengkapnya?</p>
-                        <a href="https://pemalangkab.bps.go.id/id/statistics-table/3/U0dKc1owczVSalJ5VFdOMWVETnlVRVJ6YlRJMFp6MDkjMyMzMzI3/produksi-tanaman-buah-buahan-dan-sayuran-tahunan-menurut-kecamatan-dan-jenis-tanaman-di-kabupaten-pemalang.html?year=2024" target="_blank"
-                            class="btn btn-bps">
-                            <i class="fas fa-external-link-alt"></i> Kunjungi BPS Kabupaten Pemalang
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="divider">
-
-            <div class="row justify-content-center mt-5">
-                <div class="col-lg-10">
-                    <div class="section-header text-center">
-                        <p>Hasil & Pembahasan</p>
-                        <h2>Kesimpulan Analisis Spasial</h2>
-                    </div>
-
-                    <div class="conclusion-box">
-                        <div class="conclusion-icon">
-                            <i class="flaticon-education"></i>
-                        </div>
-                        <div class="conclusion-content">
-                            <h4>Analisis Topografi & Komoditas</h4>
-                            <p>
-                                Berdasarkan visualisasi peta interaktif dan data tabular di atas, dapat disimpulkan bahwa kondisi topografi (ketinggian lahan) di Kabupaten Pemalang memiliki korelasi positif yang signifikan terhadap pola sebaran tanaman buah unggulan.
-                            </p>
-                            <ul class="conclusion-list">
-                                <li>
-                                    <span class="dot red"></span>
-                                    <div>
-                                        <strong>Zona Merah (Utara - Panas):</strong> Wilayah dataran rendah ( 100 mdpl) seperti Pemalang, Taman, dan Petarukan menjadi sentra produksi <strong>Mangga</strong> karena suhu panas memicu pembungaan optimal.>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="dot yellow"></span>
-                                    <div>
-                                        <strong>Zona Kuning (Tengah - Sedang):</strong> Wilayah peralihan seperti Belik dan Bantarbolang memiliki kelembaban tinggi yang sangat cocok untuk produktivitas <strong>Rambutan</strong>.
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="dot green"></span>
-                                    <div>
-                                        <strong>Zona Hijau (Selatan - Sejuk):</strong> Wilayah pegunungan (> 400 mdpl) seperti Moga dan Pulosari menjadi habitat ideal tanaman subtropis seperti <strong>Alpukat</strong>.
-                                    </div>
-                                </li>
-                            </ul>
+                    <div class="custom-table-container">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered mb-0">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 20%;">Kecamatan</th>
+                                        <th style="width: 25%;">Zona Elevasi</th>
+                                        <th style="width: 15%;">Mangga (Kw)</th>
+                                        <th style="width: 15%;">Rambutan (Kw)</th>
+                                        <th style="width: 15%;">Alpukat (Kw)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabel-body-dinamis">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <div class="footer">
+    <footer class="footer-modern">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-6">
-                    <div class="footer-contact">
-                        <h2>SIG Pemalang</h2>
-                        <p style="color: #dcdcdc; font-size: 14px; line-height: 1.8; margin-bottom: 20px;">
-                            Sistem Informasi Geografis pemetaan potensi tanaman buah (Alpukat, Mangga, Rambutan) di Kabupaten Pemalang untuk mendukung perencanaan pertanian berbasis wilayah.
-                        </p>
-                        <p><i class="fa fa-map-marker-alt"></i> Pemalang, Jawa Tengah</p>
-                        <p><i class="fa fa-phone-alt"></i> +62 851 5607 4723</p>
-                        <p><i class="fa fa-envelope"></i> rohmanfatkhul946@gmail.com</p>
-                        <div class="footer-social">
-                            <a class="btn btn-custom" href="https://www.instagram.com/fatkhulrhm?igsh=MWJtb2Z0ajJtZnhqYQ==" target="_blank"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-custom" href="https://youtube.com/@03.amirilfatkhulrohman28?si=WrrSbTO9J5W5Aj5X" target="_blank"><i class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5><i class="fas fa-map-marked-alt text-warning"></i> SIG PEMALANG</h5>
+                    <p>Sistem Informasi Geografis berbasis web untuk pemetaan potensi hortikultura (Mangga, Rambutan, Alpukat) di Kabupaten Pemalang menggunakan analisis elevasi digital.</p>
                 </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-link">
-                        <h2>Menu Utama</h2>
-                        <a href="index.html">Beranda</a>
-                        <a href="#about">Latar Belakang</a>
-                        <a href="map.html">Peta Interaktif</a>
-                        <a href="kontak.html">Kontak</a>
-                    </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>TAUTAN CEPAT</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html"><i class="fas fa-chevron-right mr-2"></i>Beranda</a></li>
+                        <li><a href="map.html"><i class="fas fa-chevron-right mr-2"></i>Peta Interaktif</a></li>
+                        <li><a href="kontak.html"><i class="fas fa-chevron-right mr-2"></i>Kontak</a></li>
+                    </ul>
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="footer-link">
-                        <h2>Tautan Terkait</h2>
-                        <a href="https://pemalangkab.bps.go.id" target="_blank">BPS Kab. Pemalang</a>
-                        <a href="#">Dinas Pertanian</a>
-                    </div>
+                <div class="col-lg-4 col-md-12">
+                    <h5>KONTAK</h5>
+                    <p><i class="fas fa-envelope mr-2"></i> rohmanfatkhul946@gmail.com</p>
+                    <p><i class="fas fa-university mr-2"></i> Universitas PGRI Semarang</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> Pemalang, Jawa Tengah</p>
                 </div>
             </div>
-        </div>
-
-        <div class="container copyright">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>&copy; <a href="#">SIG Pemalang</a>, All Right Reserved.</p>
-                </div>
-                <div class="col-md-6">
-                    <p>Developed By <a href="#">Amiril Fatkhul Rohman</a></p>
-                </div>
+            <div class="copyright-text">
+                <p class="mb-0">&copy; 2024 <strong>SIG Pemalang</strong>. Developed with <i class="fas fa-heart text-danger"></i> by Amiril Fatkhul Rohman.</p>
             </div>
         </div>
-    </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
-
-    <script src="js/qgis2web_expressions.js"></script>
     <script src="js/leaflet.js"></script>
-    <script src="js/leaflet.rotatedMarker.js"></script>
-    <script src="js/leaflet.pattern.js"></script>
-    <script src="js/leaflet-hash.js"></script>
-    <script src="js/Autolinker.min.js"></script>
-    <script src="js/rbush.min.js"></script>
-    <script src="js/labelgun.min.js"></script>
-    <script src="js/labels.js"></script>
-
     <script src="data/LapakGIS_Batas_Kecamatan_2024_0.js"></script>
 
     <script>
-        // 1. SETUP BASEMAP (OSM)
-        var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        });
-
-        var map = L.map('map', {
-            zoomControl: true,
-            maxZoom: 28,
-            minZoom: 10,
-            layers: [osm]
-        });
-
-        L.control.scale({
-            imperial: false
-        }).addTo(map);
-
-        // Tombol Home
-        var homeControl = L.Control.extend({
-            options: {
-                position: 'topleft'
+        /* 1. DATA MASTER LENGKAP (14 KECAMATAN) */
+        var dataValid = {
+            "Belik": {
+                mdpl: 650,
+                mangga: 491,
+                rambutan: 23,
+                alpukat: 34560
             },
-            onAdd: function(map) {
-                var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-home');
-                container.innerHTML = '<i class="fa fa-home" style="line-height:30px;"></i>';
-                container.title = "Reset Tampilan";
-                container.onclick = function() {
-                    map.fitBounds(bounds_group.getBounds());
-                }
-                return container;
+            "Pulosari": {
+                mdpl: 1050,
+                mangga: 230,
+                rambutan: 46,
+                alpukat: 2805
+            },
+            "Moga": {
+                mdpl: 565,
+                mangga: 741,
+                rambutan: 371,
+                alpukat: 1849
+            },
+            "Watukumpul": {
+                mdpl: 575,
+                mangga: 3441,
+                rambutan: 910,
+                alpukat: 10428
+            },
+            "Bantarbolang": {
+                mdpl: 150,
+                mangga: 3438,
+                rambutan: 50254,
+                alpukat: 60
+            },
+            "Randudongkal": {
+                mdpl: 158,
+                mangga: 150,
+                rambutan: 356,
+                alpukat: 0
+            },
+            "Warungpring": {
+                mdpl: 350,
+                mangga: 148,
+                rambutan: 371,
+                alpukat: 127
+            },
+            "Bodeh": {
+                mdpl: 46,
+                mangga: 1235,
+                rambutan: 1235,
+                alpukat: 263
+            },
+            "Taman": {
+                mdpl: 8,
+                mangga: 73649,
+                rambutan: 1018,
+                alpukat: 77
+            },
+            "Pemalang": {
+                mdpl: 6,
+                mangga: 22698,
+                rambutan: 40,
+                alpukat: 19.5
+            },
+            "Petarukan": {
+                mdpl: 10,
+                mangga: 27095,
+                rambutan: 0,
+                alpukat: 95
+            },
+            "Ampelgading": {
+                mdpl: 14,
+                mangga: 31204,
+                rambutan: 148,
+                alpukat: 84
+            },
+            "Comal": {
+                mdpl: 11,
+                mangga: 3050,
+                rambutan: 49,
+                alpukat: 0
+            },
+            "Ulujami": {
+                mdpl: 6,
+                mangga: 15484,
+                rambutan: 0,
+                alpukat: 0
             }
-        });
-        map.addControl(new homeControl());
-
-        // Legenda
-        var legend = L.control({
-            position: 'bottomright'
-        });
-        legend.onAdd = function(map) {
-            var div = L.DomUtil.create('div', 'legend');
-            div.innerHTML += '<h4>Legenda Zona</h4>';
-            div.innerHTML += '<i style="background: #e31a1c"></i><span>Utara (Panas) - Mangga</span><br>';
-            div.innerHTML += '<i style="background: #FFD700"></i><span>Tengah (Sedang) - Rambutan</span><br>';
-            div.innerHTML += '<i style="background: #33a02c"></i><span>Selatan (Sejuk) - Alpukat</span><br>';
-            return div;
         };
-        legend.addTo(map);
 
-        // LOGIKA PETA
-        var hash = new L.Hash(map);
-        var autolinker = new Autolinker({
-            truncate: {
-                length: 30,
-                location: 'smart'
-            }
+        // Inject Data ke GeoJSON
+        json_LapakGIS_Batas_Kecamatan_2024_0.features.forEach(function(feature) {
+            var nama = feature.properties.WADMKC;
+            if (dataValid[nama]) Object.assign(feature.properties, dataValid[nama]);
         });
-        var bounds_group = new L.featureGroup([]);
 
-        function style_LapakGIS_Batas_Kecamatan_2024_0_0(feature) {
-            switch (String(feature.properties['WADMKC'])) {
-                case 'Pemalang':
-                case 'Taman':
-                case 'Petarukan':
-                case 'Comal':
-                case 'Bodeh':
-                case 'Ulujami':
-                case 'Ampelgading':
-                    return {
-                        opacity: 1,
-                        color: 'rgba(35,35,35,1.0)',
-                        fillColor: '#e31a1c',
-                        fillOpacity: 0.8,
-                        fill: true,
-                        weight: 1
-                    }
-
-                case 'Bantarbolang':
-                case 'Randudongkal':
-                case 'Warungpring':
-                    return {
-                        opacity: 1,
-                        color: 'rgba(35,35,35,1.0)',
-                        fillColor: '#FFD700',
-                        fillOpacity: 0.8,
-                        fill: true,
-                        weight: 1
-                    }
-                case 'Moga':
-                case 'Pulosari':
-                case 'Watukumpul':
-                case 'Belik':
-                    return {
-                        opacity: 1,
-                        color: 'rgba(35,35,35,1.0)',
-                        fillColor: '#33a02c',
-                        fillOpacity: 0.8,
-                        fill: true,
-                        weight: 1
-                    }
-                default:
-                    return {
-                        opacity: 1,
-                        color: 'rgba(35,35,35,1.0)',
-                        fillColor: '#aaaaaa',
-                        fillOpacity: 0.8,
-                        fill: true,
-                        weight: 1
-                    }
-            }
+        function getMDPLText(mdpl) {
+            if (mdpl < 100) return "< 100 mdpl (Rendah)";
+            if (mdpl <= 400) return "100 - 400 mdpl (Sedang)";
+            return "> 400 mdpl (Tinggi)";
         }
 
-        function pop_LapakGIS_Batas_Kecamatan_2024_0(feature, layer) {
-            var popupContent = '<table>\
-                    <tr><td colspan="2" style="font-size:14px; color:#FDBE33; background:#333; padding:5px;"><strong>' + (feature.properties['WADMKC'] !== null ? autolinker.link(String(feature.properties['WADMKC']).replace(/'/g, '\'').toLocaleString()) : '') + '</strong></td></tr>\
-                    <tr><th scope="row">Rambutan</th><td>' + (feature.properties['rambutan'] !== null ? autolinker.link(String(feature.properties['rambutan']).replace(/'/g, '\'').toLocaleString()) : '') + ' Kw</td></tr>\
-                    <tr><th scope="row">Mangga</th><td>' + (feature.properties['mangga'] !== null ? autolinker.link(String(feature.properties['mangga']).replace(/'/g, '\'').toLocaleString()) : '') + ' Kw</td></tr>\
-                    <tr><th scope="row">Alpukat</th><td>' + (feature.properties['alpukat'] !== null ? autolinker.link(String(feature.properties['alpukat']).replace(/'/g, '\'').toLocaleString()) : '') + ' Kw</td></tr>\
-                </table>';
-            layer.bindPopup(popupContent, {
-                maxHeight: 400
+        function getColor(mdpl) {
+            if (mdpl < 100) return '#e31a1c';
+            if (mdpl <= 400) return '#FFD700';
+            return '#33a02c';
+        }
+
+        /* 2. GENERATE TABEL (DIPASTIKAN LOOP SEMUA DATA) */
+        var tbody = document.getElementById('tabel-body-dinamis');
+        // Urutkan berdasarkan Nama Kecamatan agar rapi
+        var sortedKeys = Object.keys(dataValid).sort();
+
+        sortedKeys.forEach(function(key) {
+            var d = dataValid[key];
+            var classMangga = (d.mdpl < 100) ? "highlight-red" : "";
+            var classRambutan = (d.mdpl > 100 && d.mdpl <= 400) ? "highlight-yellow" : "";
+            var classAlpukat = (d.mdpl > 400) ? "highlight-green" : "";
+
+            var row = `<tr>
+                <td style="font-weight:bold;">${key}</td>
+                <td>${getMDPLText(d.mdpl)}</td> 
+                <td class="${classMangga}">${d.mangga.toLocaleString()}</td>
+                <td class="${classRambutan}">${d.rambutan.toLocaleString()}</td>
+                <td class="${classAlpukat}">${d.alpukat.toLocaleString()}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+
+        /* 3. SETUP PETA 1 & 2 */
+        function onEachFeature(feature, layer) {
+            var p = feature.properties;
+            var popup = `<div class="popup-header">KEC. ${p.WADMKC}</div>
+                <table class="popup-table" style="width:100%">
+                    <tr><th>Zona</th><td><b>${getMDPLText(p.mdpl)}</b></td></tr>
+                    <tr><th>Mangga</th><td>${p.mangga.toLocaleString()} Kw</td></tr>
+                    <tr><th>Rambutan</th><td>${p.rambutan.toLocaleString()} Kw</td></tr>
+                    <tr><th>Alpukat</th><td>${p.alpukat.toLocaleString()} Kw</td></tr>
+                </table>`;
+            layer.bindPopup(popup);
+            layer.bindTooltip(p.WADMKC, {
+                permanent: false,
+                direction: "center",
+                className: 'label-style'
             });
         }
 
-        // Memuat Layer
-        map.createPane('pane_LapakGIS_Batas_Kecamatan_2024_0');
-        map.getPane('pane_LapakGIS_Batas_Kecamatan_2024_0').style.zIndex = 400;
-        map.getPane('pane_LapakGIS_Batas_Kecamatan_2024_0').style['mix-blend-mode'] = 'normal';
-
-        var layer_LapakGIS_Batas_Kecamatan_2024_0 = new L.geoJson(json_LapakGIS_Batas_Kecamatan_2024_0, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_LapakGIS_Batas_Kecamatan_2024_0',
-            layerName: 'layer_LapakGIS_Batas_Kecamatan_2024_0',
-            pane: 'pane_LapakGIS_Batas_Kecamatan_2024_0',
-            onEachFeature: pop_LapakGIS_Batas_Kecamatan_2024_0,
-            style: style_LapakGIS_Batas_Kecamatan_2024_0_0,
+        // PETA 1
+        var map = L.map('map', {
+            zoomControl: true,
+            maxZoom: 28,
+            minZoom: 10
         });
-        bounds_group.addLayer(layer_LapakGIS_Batas_Kecamatan_2024_0);
-        map.addLayer(layer_LapakGIS_Batas_Kecamatan_2024_0);
+        L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            attribution: 'Google Maps'
+        }).addTo(map);
 
-        layer_LapakGIS_Batas_Kecamatan_2024_0.eachLayer(function(layer) {
-            if (layer.feature.properties['WADMKC']) {
-                layer.bindTooltip(layer.feature.properties['WADMKC'], {
-                    permanent: true,
-                    direction: "center",
-                    className: 'label-style'
-                });
-            }
+        function style1(feature) {
+            return {
+                opacity: 1,
+                color: 'white',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.85,
+                fillColor: getColor(feature.properties.mdpl)
+            };
+        }
+        var layer1 = L.geoJson(json_LapakGIS_Batas_Kecamatan_2024_0, {
+            onEachFeature: onEachFeature,
+            style: style1
+        }).addTo(map);
+        map.fitBounds(layer1.getBounds());
+
+        // PETA 2
+        var map2 = L.map('map2', {
+            zoomControl: true,
+            maxZoom: 28,
+            minZoom: 10
         });
+        L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            attribution: 'Google Maps'
+        }).addTo(map2);
 
-        map.fitBounds(bounds_group.getBounds());
+        function style2(feature) {
+            var col = getColor(feature.properties.mdpl);
+            return {
+                opacity: 1,
+                color: col,
+                weight: 4,
+                fill: true,
+                fillOpacity: 0.05,
+                fillColor: col
+            };
+        }
+        var layer2 = L.geoJson(json_LapakGIS_Batas_Kecamatan_2024_0, {
+            onEachFeature: onEachFeature,
+            style: style2
+        }).addTo(map2);
+        map2.fitBounds(layer2.getBounds());
 
-        // Automasi Sidebar
-        var listContainer = document.getElementById('districtList');
-        var features = json_LapakGIS_Batas_Kecamatan_2024_0.features;
-        features.sort(function(a, b) {
-            return a.properties.WADMKC.localeCompare(b.properties.WADMKC);
-        });
+        // SIDEBAR LIST
+        var list1 = document.getElementById('districtList');
+        var list2 = document.getElementById('districtList2');
+        var feats = json_LapakGIS_Batas_Kecamatan_2024_0.features;
+        feats.sort((a, b) => a.properties.WADMKC.localeCompare(b.properties.WADMKC));
 
-        features.forEach(function(feature) {
-            var prop = feature.properties;
+        feats.forEach(function(f) {
             var li = document.createElement('li');
-            li.innerHTML = "<span>" + prop.WADMKC + "</span> <i class='fa fa-chevron-right' style='font-size:10px; margin-top:5px;'></i>";
+            li.innerHTML = `<span>${f.properties.WADMKC}</span> <i class="fas fa-chevron-right text-muted"></i>`;
             li.onclick = function() {
-                layer_LapakGIS_Batas_Kecamatan_2024_0.eachLayer(function(layer) {
-                    if (layer.feature.properties.WADMKC === prop.WADMKC) {
-                        map.flyToBounds(layer.getBounds(), {
-                            padding: [50, 50],
-                            duration: 1.5
-                        });
-                        layer.openPopup();
+                layer1.eachLayer(l => {
+                    if (l.feature.properties.WADMKC === f.properties.WADMKC) {
+                        map.flyToBounds(l.getBounds());
+                        l.openPopup();
                     }
                 });
             };
-            listContainer.appendChild(li);
+            list1.appendChild(li);
+
+            var li2 = document.createElement('li');
+            li2.innerHTML = `<span>${f.properties.WADMKC}</span> <i class="fas fa-chevron-right text-muted"></i>`;
+            li2.onclick = function() {
+                layer2.eachLayer(l => {
+                    if (l.feature.properties.WADMKC === f.properties.WADMKC) {
+                        map2.flyToBounds(l.getBounds());
+                        l.openPopup();
+                    }
+                });
+            };
+            list2.appendChild(li2);
         });
     </script>
 </body>
